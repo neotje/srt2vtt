@@ -1,25 +1,32 @@
 <?php
-/*
- * Copyright (C) 2015 Leda
- *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License
- * as published by the Free Software Foundation; either version 2
- * of the License, or (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
- */
-namespace ledat;
+/* 
+# srt2vtt
 
+This is a PHP script to convert a srt format to webvtt format.
 
-class Vtt2Srt
+## Using the script
+
+1. Download the Scipt [here](https://raw.githubusercontent.com/neotje/srt2vtt/master/Srt2Vtt.php)
+2. Place the scipt in your project folder
+3. An example:
+```php
+require_once("./path/to/script.php");
+$convert = new \theOne\Srt2Vtt("./path/to/input.srt", "./path/to/ouput.vtt");
+$convert->run();
+```
+
+## Authors
+
+* Neo Hop [Neotje](https://github.com/neotje) - changed the script to srt2vtt
+
+## Acknowledgments
+
+* [Leda Ferreira](https://github.com/leda-ferreira) - Wrote the script for vtt2srt [This Script](https://github.com/leda-ferreira/vtt2srt/blob/master/src/Vtt2Srt.php)
+*/
+
+namespace theOne;
+
+class Srt2Vtt
 {
     private $input_file;
     private $output_file;
@@ -49,12 +56,6 @@ class Vtt2Srt
         $output = 'WEBVTT'.PHP_EOL; // adding the WEBVTT header
         $i = 0;
         foreach ($lines as $line) {
-            /*
-             * at last version subtitle numbers are not working
-             * as you can see that way is trustful than older
-             *
-             *
-             * */
             $pattern1 = '#(\d{2}):(\d{2}):(\d{2})\,(\d{3})#'; // '01:52:52.554'
             $pattern2 = '#(\d{2}):(\d{2})\,(\d{3})#'; // '00:08.301'
             $m1 = preg_match($pattern1, $line);
